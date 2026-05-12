@@ -2,250 +2,230 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Blox Pro Ultra 2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Meter 2026 | Aşkını Ölç</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --accent: #00ffa3; --sec: #7000ff; --bg: #050505; --love: #ff2e63;
-            --card: rgba(255, 255, 255, 0.04); --border: rgba(255, 255, 255, 0.08);
+            --pink: #ff2e63;
+            --dark: #080808;
+            --glass: rgba(255, 255, 255, 0.05);
         }
 
-        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
-        body { 
-            margin: 0; background: #000; color: #fff; font-family: 'Outfit', sans-serif;
-            display: flex; justify-content: center; align-items: center; min-height: 100vh;
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--dark);
+            background-image: radial-gradient(circle at 50% -20%, #4d001a, transparent);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
         }
 
-        .phone {
-            width: 100%; max-width: 400px; height: 820px;
-            background: var(--bg); border: 12px solid #1a1a1a;
-            border-radius: 45px; position: relative; overflow: hidden;
-            box-shadow: 0 0 100px rgba(0,0,0,1);
-        }
-
-        /* --- LOGIN EKRANI --- */
-        #login-screen {
-            position: absolute; inset: 0; background: var(--bg); z-index: 2000;
-            display: flex; flex-direction: column; justify-content: center; padding: 40px;
-            background-image: radial-gradient(circle at top, var(--sec), transparent);
-        }
-        .logo { font-size: 40px; font-weight: 900; letter-spacing: -2px; text-align: center; }
-        .logo span { color: var(--accent); }
-        .input { 
-            width: 100%; background: #111; border: 1px solid var(--border);
-            padding: 18px; border-radius: 15px; color: #fff; text-align: center; margin: 15px 0; outline: none;
-        }
-        .btn { 
-            background: var(--accent); color: #000; border: none; width: 100%; 
-            padding: 18px; border-radius: 15px; font-weight: 800; cursor: pointer;
-        }
-
-        /* --- ANA UYGULAMA --- */
-        #app { display: none; height: 100%; flex-direction: column; }
-        .top-nav { padding: 25px 20px 15px; display: flex; justify-content: space-between; align-items: center; }
-        .wallet-stats { 
-            background: var(--card); border: 1px solid var(--border); 
-            padding: 15px; margin: 0 20px; border-radius: 20px;
-            display: flex; justify-content: space-between; font-size: 12px;
-        }
-        .stat b { display: block; font-size: 16px; color: #fff; }
-
-        .main-scroll { flex: 1; overflow-y: auto; padding: 20px; padding-bottom: 120px; }
-        .section-title { font-size: 11px; opacity: 0.5; letter-spacing: 2px; margin-bottom: 15px; }
-
-        .fruit-card {
-            background: var(--card); border: 1px solid var(--border);
-            padding: 15px; border-radius: 20px; display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
-        }
-        .f-icon { width: 50px; height: 50px; background: #000; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
-        .add-cart { background: var(--accent); color: #000; border: none; border-radius: 8px; padding: 5px 10px; font-weight: bold; cursor: pointer; font-size: 10px; margin-left: auto; }
-
-        /* --- PANELLER --- */
-        .panel {
-            position: absolute; inset: 0; background: var(--bg); z-index: 1500;
-            transform: translateY(100%); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        /* ANA KART */
+        .container {
+            width: 100%;
+            max-width: 400px;
             padding: 30px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            position: relative;
         }
-        .panel.active { transform: translateY(0); }
-        .close-p { font-size: 30px; color: var(--accent); cursor: pointer; margin-bottom: 15px; }
 
-        /* AŞK ÖLÇER ÖZEL */
-        #love-result { font-size: 50px; font-weight: 900; color: var(--love); margin: 20px 0; text-shadow: 0 0 20px rgba(255, 46, 99, 0.5); }
-        .love-btn { background: var(--love); color: white; }
-
-        /* NAV */
-        nav {
-            position: absolute; bottom: 25px; left: 15px; right: 15px;
-            background: rgba(15,15,15,0.85); backdrop-filter: blur(20px);
-            border: 1px solid var(--border); border-radius: 25px;
-            display: flex; justify-content: space-around; padding: 18px; z-index: 1000;
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ff2e63, #ff82a3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .nav-icon { font-size: 22px; cursor: pointer; opacity: 0.4; transition: 0.3s; }
-        .nav-icon.active { opacity: 1; color: var(--accent); }
+
+        p.subtitle {
+            font-size: 14px;
+            opacity: 0.6;
+            margin-bottom: 30px;
+        }
+
+        /* INPUT GRUPLARI */
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border: 2px solid rgba(255, 255, 255, 0.05);
+            padding: 18px;
+            border-radius: 20px;
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        input:focus {
+            border-color: var(--pink);
+            background: rgba(255, 46, 99, 0.05);
+        }
+
+        .heart-icon {
+            font-size: 30px;
+            margin: 10px 0;
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* BUTON */
+        .calc-btn {
+            width: 100%;
+            background: var(--pink);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(255, 46, 99, 0.3);
+            margin-top: 10px;
+        }
+
+        .calc-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 46, 99, 0.5);
+        }
+
+        /* SONUÇ EKRANI */
+        #result-box {
+            display: none;
+            margin-top: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .percentage {
+            font-size: 60px;
+            font-weight: 800;
+            color: var(--pink);
+            margin-bottom: 10px;
+        }
+
+        .message {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #ddd;
+        }
+
+        /* DEKORATİF KALPLER */
+        .bg-heart {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.1;
+            filter: blur(2px);
+        }
     </style>
 </head>
 <body>
 
-<div class="phone">
-    
-    <!-- LOGIN -->
-    <div id="login-screen">
-        <div class="logo">BLOX<span>PRO</span></div>
-        <input type="text" id="username" class="input" placeholder="Roblox Kullanıcı Adı">
-        <button class="btn" onclick="login()">SİSTEME GİR</button>
-    </div>
+    <div class="container">
+        <h1>Aşk Ölçer <span>2026</span></h1>
+        <p class="subtitle">Gerçek aşkını keşfetmeye hazır mısın?</p>
 
-    <!-- APP -->
-    <div id="app">
-        <div class="top-nav">
-            <div id="display-name" style="color:var(--accent);">@User</div>
-            <div style="font-size: 18px; cursor:pointer;" onclick="showPanel('cart')">🛒 <span id="cart-count">0</span></div>
+        <div id="main-ui">
+            <div class="input-group">
+                <input type="text" id="name1" placeholder="Senin Adın" autocomplete="off">
+            </div>
+
+            <div class="heart-icon">❤️</div>
+
+            <div class="input-group">
+                <input type="text" id="name2" placeholder="Onun Adı" autocomplete="off">
+            </div>
+
+            <button class="calc-btn" onclick="checkLove()">AŞKINI ÖLÇ</button>
         </div>
 
-        <div class="wallet-stats">
-            <div class="stat">Beli <b>12.5M</b></div>
-            <div class="stat">BC Coin <b style="color:var(--accent);">450</b></div>
-            <div class="stat">Robux <b>1,250</b></div>
+        <div id="result-box">
+            <div class="percentage" id="percent">0%</div>
+            <div class="message" id="msg">Analiz ediliyor...</div>
+            <button class="calc-btn" style="background:transparent; border: 1px solid var(--pink); margin-top:20px;" onclick="reset()">TEKRAR DENE</button>
         </div>
-
-        <div class="main-scroll">
-            <div class="section-title">MARKET STOKLARI</div>
-            <div id="market-list"></div>
-        </div>
-
-        <nav>
-            <div class="nav-icon active" onclick="showPanel('main')">🏠</div>
-            <div class="nav-icon" onclick="showPanel('trade')">🔄</div>
-            <div class="nav-icon" onclick="showPanel('love')">❤️</div>
-            <div class="nav-icon" onclick="showPanel('cart')">🛒</div>
-            <div class="nav-icon" onclick="showPanel('profile')">👤</div>
-        </nav>
     </div>
 
-    <!-- TAKAS PANELİ -->
-    <div id="trade-panel" class="panel">
-        <div class="close-p" onclick="showPanel('main')">×</div>
-        <h2>Takas Masası</h2>
-        <div id="trade-box" style="height:150px; background:#111; padding:15px; border-radius:15px; overflow-y:auto; font-size:12px; margin-bottom:10px;"></div>
-        <input type="text" id="t-input" class="input" placeholder="Meyve adı...">
-        <button class="btn" onclick="addToTrade()">EKLE</button>
-    </div>
+    <script>
+        function checkLove() {
+            const n1 = document.getElementById('name1').value.trim();
+            const n2 = document.getElementById('name2').value.trim();
 
-    <!-- AŞK ÖLÇER PANELİ -->
-    <div id="love-panel" class="panel">
-        <div class="close-p" onclick="showPanel('main')">×</div>
-        <center>
-            <h2 style="color:var(--love);">Aşk <span>Ölçer</span></h2>
-            <input type="text" id="name1" class="input" placeholder="Senin Adın">
-            <div style="font-size:30px;">+</div>
-            <input type="text" id="name2" class="input" placeholder="Onun Adı">
+            if (n1 === "" || n2 === "") {
+                alert("Lütfen iki ismi de yaz kk!");
+                return;
+            }
+
+            // Arayüzü değiştir
+            document.getElementById('main-ui').style.display = "none";
+            document.getElementById('result-box').style.display = "block";
+
+            // Rastgele ama isme bağlı gibi hissettiren bir sayı üretelim
+            const score = Math.floor(Math.random() * 101);
             
-            <div id="love-result" style="display:none;">%0</div>
-            <p id="love-status" style="font-size:14px; opacity:0.7;"></p>
-            
-            <button class="btn love-btn" onclick="calculateLove()">ÖLÇ BAKALIM ❤️</button>
-        </center>
-    </div>
+            // Animasyonlu sayı artışı
+            let current = 0;
+            const interval = setInterval(() => {
+                if (current >= score) {
+                    clearInterval(interval);
+                    showFinalMessage(score);
+                } else {
+                    current++;
+                    document.getElementById('percent').innerText = current + "%";
+                }
+            }, 20);
+        }
 
-    <!-- SEPET PANELİ -->
-    <div id="cart-panel" class="panel">
-        <div class="close-p" onclick="showPanel('main')">×</div>
-        <h2>Sepetim</h2>
-        <div id="cart-items" style="max-height:400px; overflow-y:auto;">
-            <p style="opacity:0.4;">Sepet boş.</p>
-        </div>
-        <div style="border-top:1px solid var(--border); padding-top:15px; margin-top:15px;">
-            <div style="display:flex; justify-content:space-between;"><span>Toplam:</span> <b id="cart-total" style="color:var(--accent);">0 B$</b></div>
-        </div>
-    </div>
+        function showFinalMessage(score) {
+            const msg = document.getElementById('msg');
+            if (score > 85) {
+                msg.innerText = "Vay canına! Siz birbiriniz için yaratılmışsınız. Hemen bir yüzük bakmaya başla! 💍🔥";
+            } else if (score > 60) {
+                msg.innerText = "Baya bi kıvılcım var! Bir kahve içmeye gitseniz bu iş olur gibi. 😉☕";
+            } else if (score > 40) {
+                msg.innerText = "Fena değil, ama biraz daha çabalaman lazım kk. Pes etme! 💪";
+            } else if (score > 20) {
+                msg.innerText = "Yani... Arkadaş kalsanız daha iyi sanki? Ama sen bilirsin tabii. 😶";
+            } else {
+                msg.innerText = "Hemen uzaklaş! Bu aşk değil, başka bir şey... Koşarak kaç! 💀🏃‍♂️";
+            }
+        }
 
-    <!-- PROFİL PANELİ -->
-    <div id="profile-panel" class="panel">
-        <div class="close-p" onclick="showPanel('main')">×</div>
-        <center>
-            <div id="p-avatar" style="width:80px; height:80px; background:var(--accent); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:35px; color:black; font-weight:900;">?</div>
-            <h2 id="p-user" style="margin-top:15px;">User</h2>
-            <button class="btn" style="margin-top:100px; background:red; color:#fff;" onclick="location.reload()">ÇIKIŞ</button>
-        </center>
-    </div>
-
-</div>
-
-<script>
-    let cart = [];
-
-    function login() {
-        const user = document.getElementById('username').value;
-        if(user.length < 3) return alert("İsim gir kk!");
-        document.getElementById('login-screen').style.display = "none";
-        document.getElementById('app').style.display = "flex";
-        document.getElementById('display-name').innerText = "@" + user;
-        document.getElementById('p-user').innerText = user;
-        document.getElementById('p-avatar').innerText = user[0].toUpperCase();
-        loadMarket();
-    }
-
-    function calculateLove() {
-        const n1 = document.getElementById('name1').value;
-        const n2 = document.getElementById('name2').value;
-        
-        if(!n1 || !n2) return alert("İsimleri yaz kk!");
-        
-        const res = document.getElementById('love-result');
-        const status = document.getElementById('love-status');
-        
-        // Rastgele yüzde ama isimlere göre biraz sabitlik katar
-        const percent = Math.floor(Math.random() * 101);
-        
-        res.innerText = "%" + percent;
-        res.style.display = "block";
-        
-        if(percent > 80) status.innerText = "Valla bunlar evlenir! 🔥";
-        else if(percent > 50) status.innerText = "Baya bi seviyo gibi ama bakalım.. 😉";
-        else if(percent > 20) status.innerText = "Biraz zor ama imkansız değil. 🧐";
-        else status.innerText = "Yazık.. Başka kapıya kk. 💀";
-    }
-
-    function loadMarket() {
-        const fruits = [
-            {n: "Dragon", p: 10000000, ps: "10M", e: "🐉"},
-            {n: "Kitsune", p: 8000000, ps: "8M", e: "🦊"},
-            {n: "Portal", p: 1900000, ps: "1.9M", e: "🌀"}
-        ];
-        const list = document.getElementById('market-list');
-        list.innerHTML = "";
-        fruits.forEach(f => {
-            list.innerHTML += `<div class="fruit-card"><div class="f-icon">${f.e}</div><div><b>${f.n}</b><br><small>${f.ps} B$</small></div><button class="add-cart" onclick="addToCart('${f.n}', ${f.p})">EKLE</button></div>`;
-        });
-    }
-
-    function addToCart(n, p) { cart.push({n, p}); updateCart(); }
-    
-    function updateCart() {
-        document.getElementById('cart-count').innerText = cart.length;
-        const list = document.getElementById('cart-items');
-        const totalDisp = document.getElementById('cart-total');
-        if(cart.length === 0) return;
-        let total = 0; list.innerHTML = "";
-        cart.forEach(i => { total += i.p; list.innerHTML += `<div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #111;"><span>${i.n}</span><span>${i.p.toLocaleString()} B$</span></div>`; });
-        totalDisp.innerText = total.toLocaleString() + " B$";
-    }
-
-    function showPanel(id) {
-        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-        if(id !== 'main') document.getElementById(id + '-panel').classList.add('active');
-        document.querySelectorAll('.nav-icon').forEach((icon, index) => {
-            icon.classList.remove('active');
-            const navMap = {main:0, trade:1, love:2, cart:3, profile:4};
-            if(navMap[id] === index) icon.classList.add('active');
-        });
-    }
-
-    function addToTrade() {
-        const inp = document.getElementById('t-input');
-        if(inp.value) { document.getElementById('trade-box').innerHTML += `<div><b>Siz:</b> ${inp.value}</div>`; inp.value = ""; }
-    }
-</script>
+        function reset() {
+            document.getElementById('name1').value = "";
+            document.getElementById('name2').value = "";
+            document.getElementById('main-ui').style.display = "block";
+            document.getElementById('result-box').style.display = "none";
+            document.getElementById('percent').innerText = "0%";
+        }
+    </script>
 </body>
 </html>
